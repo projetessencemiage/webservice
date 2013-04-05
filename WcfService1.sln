@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService1", "WcfService1\WcfService1.csproj", "{27A44573-62CA-4F0F-9B83-77C6C18C198F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelTracker_Lib", "FuelTracker_Lib\FuelTracker_Lib.csproj", "{D375282F-C9CD-4659-A7B9-04B639238DFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27A44573-62CA-4F0F-9B83-77C6C18C198F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27A44573-62CA-4F0F-9B83-77C6C18C198F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27A44573-62CA-4F0F-9B83-77C6C18C198F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27A44573-62CA-4F0F-9B83-77C6C18C198F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D375282F-C9CD-4659-A7B9-04B639238DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D375282F-C9CD-4659-A7B9-04B639238DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D375282F-C9CD-4659-A7B9-04B639238DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D375282F-C9CD-4659-A7B9-04B639238DFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
