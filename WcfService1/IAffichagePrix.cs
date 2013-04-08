@@ -12,6 +12,9 @@ namespace WcfService1
     public interface IAffichagePrix
     {
         [OperationContract]
-        string GetPrixCodePostal(int codePostal);
+        List<string> GetPrixCodePostal(int codePostal);
+
+        [OperationContract]
+        List<string> GetPrixDepartement(int departement);
     }
 }

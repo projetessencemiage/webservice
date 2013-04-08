@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using WcfService1.ReadBDD.Delegate;
 
 namespace WcfService1
 {
@@ -11,9 +12,21 @@ namespace WcfService1
     // REMARQUE : pour lancer le client test WCF afin de tester ce service, sélectionnez AffichagePrix.svc ou AffichagePrix.svc.cs dans l'Explorateur de solutions et démarrez le débogage.
     public class AffichagePrix : IAffichagePrix
     {
-        public string GetPrixCodePostal(int codePostal)
+        private DelegateAffichagePrix delegateAffichagePrix;
+
+        public AffichagePrix()
         {
-            return "Le prix le moins cher pour le codePostal " + codePostal + " est de 1,42€";
+            delegateAffichagePrix = new DelegateAffichagePrix();
+        }
+
+        public List<string> GetPrixCodePostal(int codePostal)
+        {
+            return delegateAffichagePrix.getPrixCommune(codePostal);
+        }
+
+        public List<string> GetPrixDepartement(int departement)
+        {
+            return new List<string>();
         }
     }
 }

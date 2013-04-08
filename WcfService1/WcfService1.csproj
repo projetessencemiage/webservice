@@ -70,15 +70,13 @@
     </Compile>
     <Compile Include="IAffichagePrix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadBDD\DAO\ReadDonneePrix.cs" />
+    <Compile Include="ReadBDD\Delegate\DelegateAffichagePrix.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ReadBDD\DAO\" />
-    <Folder Include="ReadBDD\Delegate\" />
-    <Folder Include="ReadBDD\Service\" />
     <Folder Include="WriteBDD\DAO\" />
     <Folder Include="WriteBDD\Delegate\" />
-    <Folder Include="WriteBDD\Service\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
