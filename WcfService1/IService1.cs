@@ -19,6 +19,9 @@ namespace WcfService1
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
+        [OperationContract]
+        List<String> getPrix();
+
         
         // TODO: ajoutez vos opérations de service ici
     }
