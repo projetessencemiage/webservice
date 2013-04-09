@@ -36,11 +36,12 @@ namespace WcfService1.ReadBDD.Delegate
                     string s_lat = nodeList[i].Attributes["latitude"].Value;
                     float longitude = 0;
                     float lattitude = 0;
-                    if(s_long != "" && s_long !=null){
-                        longitude = Single.Parse(s_long.Replace(".", ","));
+                    if(s_long.Length > 2 && s_long !=null){
+                        longitude = constructionLongitude(s_long);
                     }
-                    if(s_lat != "" && s_lat !=null){
-                        lattitude = Single.Parse(s_lat.Replace(".", ","));
+                    if (s_lat.Length > 2 && s_lat != null)
+                    {
+                        lattitude = constructionLattitude(s_lat);
                     }
                     string id_enseigne = null;
                     string enseigne_marque = "";
@@ -58,6 +59,22 @@ namespace WcfService1.ReadBDD.Delegate
                 return null;
             }
             return listStation;
+        }
+
+        private float constructionLattitude(string s_lat)
+        {
+            s_lat = s_lat.Replace(".", "");
+            s_lat = s_lat.Replace(",", "");
+            string temp = s_lat.Substring(0, 2) + "," + s_lat.Substring(1, s_lat.Length - 2);
+            return Single.Parse(temp);
+        }
+
+        private float constructionLongitude(string s_long)
+        {
+            s_long = s_long.Replace(".", "");
+            s_long = s_long.Replace(",", "");
+            string temp = s_long.Substring(0,1) + "," + s_long.Substring(1,s_long.Length-1);
+            return Single.Parse(temp);
         }
 
         private XmlNodeList recuperationNoeudStation(string url)

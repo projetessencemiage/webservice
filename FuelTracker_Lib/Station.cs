@@ -40,7 +40,6 @@ namespace FuelTracker_Lib
 
         public Station(string id_station1, List<Prix> list_prix, string address1)
         {
-            // TODO: Complete member initialization
             this.id_station1 = id_station1;
             this.list_prix = list_prix;
             this.address1 = address1;
