@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace FuelTracker_Lib
 {
-    class Enseigne
+    public class Enseigne
     {
-        public int id_enseigne { get; set; }
-        public String enseigne_image_path { get; set; }
-        public String enseigne_name { get; set; }
+        public string id_enseigne;
+        public string enseigne_name;
 
         public Enseigne() { }
+
+        public Enseigne(string id_enseigne, string enseigne_name) 
+        {
+            this.id_enseigne = id_enseigne;
+            this.enseigne_name = enseigne_name;
+        }
     }
 }

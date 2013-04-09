@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FuelTracker_Lib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -19,7 +20,7 @@ namespace WcfService1
             delegateAffichagePrix = new DelegateAffichagePrix();
         }
 
-        public List<string> GetPrixCodePostal(int codePostal)
+        public List<Station> GetPrixCodePostal(int codePostal)
         {
             return delegateAffichagePrix.getPrixCommune(codePostal);
         }

@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace FuelTracker_Lib
 {
-    class Carburant_type
+    public class Carburant_type
     {
-        public int id_type { get; set; }
-        public String type_desc { get; set; }
+        public string id_type;
+        public string type_nom;
 
         public Carburant_type() { }
+
+        public Carburant_type(string id_type, string type_nom)
+        {
+            this.id_type = id_type;
+            this.type_nom = type_nom;
+        }
     }
 }

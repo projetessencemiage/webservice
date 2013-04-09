@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FuelTracker_Lib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,7 +13,7 @@ namespace WcfService1
     public interface IAffichagePrix
     {
         [OperationContract]
-        List<string> GetPrixCodePostal(int codePostal);
+        List<Station> GetPrixCodePostal(int codePostal);
 
         [OperationContract]
         List<string> GetPrixDepartement(int departement);
