@@ -81,10 +81,10 @@
     <Compile Include="ReadBDD\DAO\ReadDonneeStation.cs" />
     <Compile Include="ReadBDD\Delegate\DelegateAffichagePrix.cs" />
     <Compile Include="ReadBDD\Delegate\DelegateMiseAjourBase.cs" />
+    <Compile Include="WriteBDD\DAO\WriteMiseAjourBaseXML.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="WriteBDD\DAO\" />
     <Folder Include="WriteBDD\Delegate\" />
   </ItemGroup>
   <ItemGroup>

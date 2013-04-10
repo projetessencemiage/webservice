@@ -26,6 +26,7 @@ namespace WcfService1.ReadBDD.DAO
             List<Prix> listPrix = null;
             DataSet ds = new DataSet();
             MySqlConnection connection;
+            listPrix = new List<Prix>();
             try
             {
                 connection = new MySqlConnection(myConnectionString);
@@ -46,7 +47,6 @@ namespace WcfService1.ReadBDD.DAO
                 }
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    listPrix = new List<Prix>();
                     string type_id = dr["prix_type_id"].ToString();
                     string type_nom = dr["type_nom"].ToString();
                     float price = Single.Parse(dr["prix_valeur"].ToString());

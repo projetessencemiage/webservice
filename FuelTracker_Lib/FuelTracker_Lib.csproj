@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Carburant_type.cs" />
+    <Compile Include="DitionnaireEssenceType.cs" />
     <Compile Include="Enseigne.cs" />
     <Compile Include="Prix.cs" />
     <Compile Include="Station.cs" />

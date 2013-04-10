@@ -4,18 +4,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Xml;
+using WcfService1.WriteBDD.DAO;
 
 namespace WcfService1.ReadBDD.Delegate
 {
     public class DelegateMiseAjourBase
     {
+        WriteMiseAjourBaseXML daoWriteMiseAjourBaseXML;
+
+        public DelegateMiseAjourBase()
+        {
+            daoWriteMiseAjourBaseXML = new WriteMiseAjourBaseXML();
+        }
+
         public bool delegateMiseAjourBaseXml(string url)
         {
             XmlNodeList nodeList  = recuperationNoeudStation(url);
             if (nodeList != null)
             {
                 List<Station> listStation = constructionStation(nodeList);
-                // Faire APPEL DAO
+                return daoWriteMiseAjourBaseXML.writeDonneesXML(listStation);
             }
             return false;
         }

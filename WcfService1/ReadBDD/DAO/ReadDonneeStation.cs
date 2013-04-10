@@ -26,6 +26,7 @@ namespace WcfService1.ReadBDD.DAO
         {
             List<Station> listStation = null;
             DataSet ds = new DataSet();
+            listStation = new List<Station>();
             MySqlConnection connection;
             try
             {
@@ -47,7 +48,6 @@ namespace WcfService1.ReadBDD.DAO
                 }
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    listStation = new List<Station>();
                     string id_station = dr["station_id"].ToString();
                     string address = dr["station_adresse"].ToString();
                     string city = dr["station_ville"].ToString();
