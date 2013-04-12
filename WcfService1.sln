@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelTracker_Lib", "FuelTrac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocalisation_Lib", "Geolocalisation_Lib\Geolocalisation_Lib.csproj", "{FA4219A0-89F1-4569-9B92-6C7C07D3F3F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger_Lib", "Logger_Lib\Logger_Lib.csproj", "{5EF739C0-1C2C-43B5-8041-B3BF89EA84A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{FA4219A0-89F1-4569-9B92-6C7C07D3F3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA4219A0-89F1-4569-9B92-6C7C07D3F3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA4219A0-89F1-4569-9B92-6C7C07D3F3F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EF739C0-1C2C-43B5-8041-B3BF89EA84A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF739C0-1C2C-43B5-8041-B3BF89EA84A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF739C0-1C2C-43B5-8041-B3BF89EA84A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF739C0-1C2C-43B5-8041-B3BF89EA84A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

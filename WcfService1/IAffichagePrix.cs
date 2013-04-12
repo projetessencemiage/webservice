@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using WcfService1.Outil;
 
 namespace WcfService1
 {
@@ -22,6 +23,6 @@ namespace WcfService1
         List<Station> GetPrixVille(string ville);
 
         [OperationContract]
-        List<Station> GetPrixPosition(int distance, float longitude, float latitude);
+        List<StationAndDistance> GetPrixPosition(int distance, float longitude, float latitude);
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WcfService1.Outil;
 using WcfService1.ReadBDD.DAO;
 
 namespace WcfService1.ReadBDD.Delegate
@@ -20,6 +21,7 @@ namespace WcfService1.ReadBDD.Delegate
 
         public List<Station> getPrixCommune(int codePostal)
         {
+            AffichagePrix.logger.ecrireInfoLogger("Accès à delegateAffichagePrix.recupererStationCodePostalSansPrix(int codePostal) avec codePostal = " + codePostal);
             List<Station> listStation = daoReadDonneeStation.recupererStationCodePostalSansPrix(codePostal);
             if(listStation != null)
             {
@@ -31,14 +33,14 @@ namespace WcfService1.ReadBDD.Delegate
             return listStation;
         }
 
-        public List<Station> getPrixPosition(int distance, float longitude, float latitude)
+        public List<StationAndDistance> getPrixPosition(int distance, float longitude, float latitude)
         {
-            List<Station> listStation = daoReadDonneeStation.recupererStationParRapportPosition(distance, longitude, latitude);
+            List<StationAndDistance> listStation = daoReadDonneeStation.recupererStationParRapportPosition(distance, longitude, latitude);
             if (listStation != null)
             {
-                foreach (Station uneStation in listStation)
+                foreach (StationAndDistance uneStationAndDistance in listStation)
                 {
-                    uneStation.setPrice(daoReadDonneePrix.readPrixByStation(uneStation.getIdStation()));
+                    uneStationAndDistance.setPrice(daoReadDonneePrix.readPrixByStation(uneStationAndDistance.getIdStation()));
                 }
             }
             return listStation;

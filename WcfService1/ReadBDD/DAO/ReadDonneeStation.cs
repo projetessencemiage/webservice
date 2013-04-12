@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
+using WcfService1.Outil;
 
 namespace WcfService1.ReadBDD.DAO
 {
@@ -69,7 +70,7 @@ namespace WcfService1.ReadBDD.DAO
             return listStation;
         }
 
-        public List<Station> recupererStationParRapportPosition(int distance, float longitude, float latitude)
+        public List<StationAndDistance> recupererStationParRapportPosition(int distance, float longitude, float latitude)
         {
             //Calcul des longitudes Max et Min à partir de la position.
             //0,01 degré décimaux ~= 1,113km.
@@ -83,23 +84,25 @@ namespace WcfService1.ReadBDD.DAO
             //On récupère les stations comprises dans le carré.
 
 
-            List<Station> listStation = null;
+            List<StationAndDistance> listStation = new List<StationAndDistance>();
             DataSet ds = new DataSet();
-            listStation = new List<Station>();
             MySqlConnection connection;
             try
             {
+                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
 
                 cmd = connection.CreateCommand();
                 string requete = "Select station_id, station_adresse, station_cp, station_ville, station_tel, station_lat, station_long, station_id_enseigne, enseigne_marque From station Join enseigne on enseigne.enseigne_id = station.station_id_enseigne where station_lat BETWEEN @lat_min AND @lat_max AND station_long BETWEEN @long_min AND @long_max";
+                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec les parametres lat_min = " + lat_min + " & lat_max = " + lat_max + " & long_min = " + long_min + " & long_max = " + long_max);
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@lat_min", lat_min);
                 cmd.Parameters.AddWithValue("@lat_max", lat_max);
                 cmd.Parameters.AddWithValue("@long_min", long_min);
                 cmd.Parameters.AddWithValue("@long_max", long_max);
+
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
 
                 adap.Fill(ds);
@@ -119,18 +122,20 @@ namespace WcfService1.ReadBDD.DAO
                     float lat_station = Single.Parse(dr["station_lat"].ToString().Replace(".", ","));
                     string id_enseigne = dr["station_id_enseigne"].ToString();
                     string enseigne_marque = dr["enseigne_marque"].ToString();
-                    if (CalculDistance.getDistance(lat_station, long_station, latitude, longitude) <= System.Convert.ToDouble(distance))
+                    double distanceAvecPosition = CalculDistance.getDistance(lat_station, long_station, latitude, longitude);
+                    if (distanceAvecPosition <= System.Convert.ToDouble(distance))
                     {
-                        listStation.Add(new Station(id_station, null, address, city, codePostal, long_station, lat_station, id_enseigne, enseigne_marque, tel));
+                        listStation.Add(new StationAndDistance(
+                            new Station(id_station, null, address, city, codePostal, long_station, lat_station, id_enseigne, enseigne_marque, tel),
+                            distanceAvecPosition));
                     }
                 }
-
+                listStation.Sort();
             }
             catch (Exception e)
             {
                 return null;
             }
-
             return listStation;
         }
 

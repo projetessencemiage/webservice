@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="IAffichagePrix.cs" />
     <Compile Include="IAjoutDonneesAdmin.cs" />
+    <Compile Include="Outil\StationAndDistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadBDD\DAO\ReadDonneePrix.cs" />
     <Compile Include="ReadBDD\DAO\ReadDonneeStation.cs" />
@@ -104,6 +105,10 @@
     <ProjectReference Include="..\Geolocalisation_Lib\Geolocalisation_Lib.csproj">
       <Project>{fa4219a0-89f1-4569-9b92-6c7c07d3f3f7}</Project>
       <Name>Geolocalisation_Lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger_Lib\Logger_Lib.csproj">
+      <Project>{5ef739c0-1c2c-43b5-8041-b3bf89ea84a5}</Project>
+      <Name>Logger_Lib</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

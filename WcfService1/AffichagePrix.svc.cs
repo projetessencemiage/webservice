@@ -1,10 +1,13 @@
 ﻿using FuelTracker_Lib;
+using Logger_Lib;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using WcfService1.Outil;
 using WcfService1.ReadBDD.Delegate;
 
 namespace WcfService1
@@ -14,29 +17,35 @@ namespace WcfService1
     public class AffichagePrix : IAffichagePrix
     {
         private DelegateAffichagePrix delegateAffichagePrix;
+        public static Logger logger;
 
         public AffichagePrix()
         {
             delegateAffichagePrix = new DelegateAffichagePrix();
+            logger = new Logger(ConfigurationManager.AppSettings["url_logger"], "AffichagePrix");
         }
 
         public List<Station> GetPrixCodePostal(int codePostal)
         {
+            logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixCommune(int codePostal) avec codePostal = " + codePostal);
             return delegateAffichagePrix.getPrixCommune(codePostal);
         }
 
-        public List<Station> GetPrixPosition(int distance, float longitude, float latitude)
+        public List<StationAndDistance> GetPrixPosition(int distance, float longitude, float latitude)
         {
+            logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixPosition(int distance, float longitude, float latitude) avec distance = " + distance + " & longitude = " + longitude + " & latitude = " + latitude);
             return delegateAffichagePrix.getPrixPosition(distance, longitude, latitude);
         }
 
         public List<Station> GetPrixDepartement(int departement)
         {
+            logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixDepartement(int codePostal) avec departement = " + departement);
             return delegateAffichagePrix.getPrixDepartement(departement);
         }
 
-        public List<Station> GetPrixVille(String ville)
+        public List<Station> GetPrixVille(string ville)
         {
+            logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixVille(string ville) avec ville = " + ville);
             return delegateAffichagePrix.getPrixVille(ville);
         }
     }
