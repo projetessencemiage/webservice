@@ -17,10 +17,7 @@ namespace FuelTracker_Lib
         public float lattitude;
         public string id_enseigne;
         public Enseigne enseigne;
-        private string id_station1;
-        private List<Prix> list_prix;
-        private string address1;
-        private string tel;
+        public string tel;
 
         public Station() { }
 
@@ -36,13 +33,6 @@ namespace FuelTracker_Lib
             this.id_enseigne = id_enseigne;
             this.enseigne = new Enseigne(id_enseigne, enseigne_marque);
             this.tel = tel;
-        }
-
-        public Station(string id_station1, List<Prix> list_prix, string address1)
-        {
-            this.id_station1 = id_station1;
-            this.list_prix = list_prix;
-            this.address1 = address1;
         }
 
         public void setPrice(List<Prix> price_list)

@@ -30,5 +30,44 @@ namespace WcfService1.ReadBDD.Delegate
             }
             return listStation;
         }
+
+        public List<Station> getPrixPosition(int distance, float longitude, float latitude)
+        {
+            List<Station> listStation = daoReadDonneeStation.recupererStationParRapportPosition(distance, longitude, latitude);
+            if (listStation != null)
+            {
+                foreach (Station uneStation in listStation)
+                {
+                    uneStation.setPrice(daoReadDonneePrix.readPrixByStation(uneStation.getIdStation()));
+                }
+            }
+            return listStation;
+        }
+
+        public List<Station> getPrixDepartement(int departement)
+        {
+            List<Station> listStation = daoReadDonneeStation.recupererStationDepartementSansPrix(departement);
+            if (listStation != null)
+            {
+                foreach (Station uneStation in listStation)
+                {
+                    uneStation.setPrice(daoReadDonneePrix.readPrixByStation(uneStation.getIdStation()));
+                }
+            }
+            return listStation;
+        }
+
+        public List<Station> getPrixVille(string ville)
+        {
+            List<Station> listStation = daoReadDonneeStation.recupererStationVilleSansPrix(ville);
+            if (listStation != null)
+            {
+                foreach (Station uneStation in listStation)
+                {
+                    uneStation.setPrice(daoReadDonneePrix.readPrixByStation(uneStation.getIdStation()));
+                }
+            }
+            return listStation;
+        }
     }
 }

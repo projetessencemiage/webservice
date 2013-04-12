@@ -25,9 +25,19 @@ namespace WcfService1
             return delegateAffichagePrix.getPrixCommune(codePostal);
         }
 
-        public List<string> GetPrixDepartement(int departement)
+        public List<Station> GetPrixPosition(int distance, float longitude, float latitude)
         {
-            return new List<string>();
+            return delegateAffichagePrix.getPrixPosition(distance, longitude, latitude);
+        }
+
+        public List<Station> GetPrixDepartement(int departement)
+        {
+            return delegateAffichagePrix.getPrixDepartement(departement);
+        }
+
+        public List<Station> GetPrixVille(String ville)
+        {
+            return delegateAffichagePrix.getPrixVille(ville);
         }
     }
 }

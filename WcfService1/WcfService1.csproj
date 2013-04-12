@@ -101,6 +101,10 @@
       <Project>{d375282f-c9cd-4659-a7b9-04b639238dfe}</Project>
       <Name>FuelTracker_Lib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Geolocalisation_Lib\Geolocalisation_Lib.csproj">
+      <Project>{fa4219a0-89f1-4569-9b92-6c7c07d3f3f7}</Project>
+      <Name>Geolocalisation_Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

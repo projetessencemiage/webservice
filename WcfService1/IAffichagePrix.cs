@@ -16,6 +16,12 @@ namespace WcfService1
         List<Station> GetPrixCodePostal(int codePostal);
 
         [OperationContract]
-        List<string> GetPrixDepartement(int departement);
+        List<Station> GetPrixDepartement(int departement);
+
+        [OperationContract]
+        List<Station> GetPrixVille(string ville);
+
+        [OperationContract]
+        List<Station> GetPrixPosition(int distance, float longitude, float latitude);
     }
 }
