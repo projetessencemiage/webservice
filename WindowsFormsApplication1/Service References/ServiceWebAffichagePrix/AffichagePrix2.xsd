@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/FuelTracker_Lib" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/FuelTracker_Lib" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Station" nillable="true" type="tns:Station" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStation" nillable="true" type="tns:ArrayOfStation" />
+  <xs:complexType name="Station">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="code_postal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="enseigne" nillable="true" type="tns:Enseigne" />
+      <xs:element minOccurs="0" name="id_enseigne" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_station" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="lattitude" type="xs:float" />
+      <xs:element minOccurs="0" name="longitude" type="xs:float" />
+      <xs:element minOccurs="0" name="price_list" nillable="true" type="tns:ArrayOfPrix" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Station" nillable="true" type="tns:Station" />
+  <xs:complexType name="Enseigne">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="enseigne_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_enseigne" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Enseigne" nillable="true" type="tns:Enseigne" />
+  <xs:complexType name="ArrayOfPrix">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Prix" nillable="true" type="tns:Prix" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPrix" nillable="true" type="tns:ArrayOfPrix" />
+  <xs:complexType name="Prix">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="carburant_type" nillable="true" type="tns:Carburant_type" />
+      <xs:element minOccurs="0" name="dateMiseAjour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_station" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="price" type="xs:float" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Prix" nillable="true" type="tns:Prix" />
+  <xs:complexType name="Carburant_type">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id_type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="type_nom" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Carburant_type" nillable="true" type="tns:Carburant_type" />
+</xs:schema>

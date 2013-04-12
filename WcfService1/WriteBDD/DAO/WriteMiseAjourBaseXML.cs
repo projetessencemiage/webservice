@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -12,10 +13,10 @@ namespace WcfService1.WriteBDD.DAO
         private string myConnectionString;
         public WriteMiseAjourBaseXML()
         {
-            string server = "192.168.0.1";
-            string database = "test";
-            string uid = "dev";
-            string password = "dev";
+            string server = ConfigurationManager.AppSettings["server"];
+            string database = ConfigurationManager.AppSettings["database"];
+            string uid = ConfigurationManager.AppSettings["uid"];
+            string password = ConfigurationManager.AppSettings["password"];
             myConnectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
         }

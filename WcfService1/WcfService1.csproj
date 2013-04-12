@@ -88,6 +88,7 @@
     <Folder Include="WriteBDD\Delegate\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\ProjetEssence.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

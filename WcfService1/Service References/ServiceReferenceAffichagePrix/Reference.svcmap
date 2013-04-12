@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ea10ba1f-9d03-42f2-8fb3-c51f32ddf985" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2301/AffichagePrix.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="AffichagePrix.xsd" MetadataType="Schema" ID="9554cf37-bae5-4d4e-b709-8853ec76aa08" SourceId="1" SourceUrl="http://localhost:2301/AffichagePrix.svc?xsd=xsd3" />
+    <MetadataFile FileName="AffichagePrix.wsdl" MetadataType="Wsdl" ID="7f3cd51e-fb07-4679-b0c4-5b8a31f033f4" SourceId="1" SourceUrl="http://localhost:2301/AffichagePrix.svc?wsdl" />
+    <MetadataFile FileName="AffichagePrix1.xsd" MetadataType="Schema" ID="fda4237b-38ff-4054-a31b-0991116b63d3" SourceId="1" SourceUrl="http://localhost:2301/AffichagePrix.svc?xsd=xsd1" />
+    <MetadataFile FileName="AffichagePrix2.xsd" MetadataType="Schema" ID="23e0ee7b-2d88-4e56-acd0-7661616c27ee" SourceId="1" SourceUrl="http://localhost:2301/AffichagePrix.svc?xsd=xsd2" />
+    <MetadataFile FileName="AffichagePrix.disco" MetadataType="Disco" ID="1f0c36e5-b8a2-440d-a1cd-302fd8e66c76" SourceId="1" SourceUrl="http://localhost:2301/AffichagePrix.svc?disco" />
+    <MetadataFile FileName="AffichagePrix3.xsd" MetadataType="Schema" ID="f2b8f603-5fb2-4afd-b6a8-dc665c074759" SourceId="1" SourceUrl="http://localhost:2301/AffichagePrix.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
