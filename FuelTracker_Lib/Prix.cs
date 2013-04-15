@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FuelTracker_Lib
 {
+    [DataContract]
     public class Prix
     {
+        [DataMember]
         public string id_station;
+        [DataMember]
         public float price;
+        [DataMember]
         public Carburant_type carburant_type;
+        [DataMember]
         public string dateMiseAjour;
 
         public Prix() { }

@@ -3,20 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace FuelTracker_Lib
 {
+    [DataContract]
     public class Station
     {
+        [DataMember]
         public string id_station;
+        [DataMember]
         public List<Prix> price_list;
+        [DataMember]
         public string address;
+        [DataMember]
         public string code_postal;
+        [DataMember]
         public string city;
+        [DataMember]
         public float longitude;
+        [DataMember]
         public float lattitude;
+        [DataMember]
         public string id_enseigne;
+        [DataMember]
         public Enseigne enseigne;
+        [DataMember]
         public string tel;
 
         public Station() { }

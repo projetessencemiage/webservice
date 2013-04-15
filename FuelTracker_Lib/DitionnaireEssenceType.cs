@@ -38,5 +38,15 @@ namespace FuelTracker_Lib
             }
             return -1;
         }
+
+        public SortedList<int, string> getEssenceTypeValue()
+        {
+            SortedList<int, string> etv = new SortedList<int, string>();
+            foreach(KeyValuePair<int,String> unType in essenceTypeValue)
+            {
+                etv.Add(unType.Key, unType.Value);
+            }
+            return etv;
+        }
     }
 }

@@ -63,6 +63,7 @@
   <ItemGroup>
     <Content Include="AffichagePrix.svc" />
     <Content Include="AjoutDonneesAdmin.svc" />
+    <Content Include="RecuperationOutilsDonnees.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -76,12 +77,18 @@
     </Compile>
     <Compile Include="IAffichagePrix.cs" />
     <Compile Include="IAjoutDonneesAdmin.cs" />
+    <Compile Include="IRecuperationOutilsDonnees.cs" />
     <Compile Include="Outil\StationAndDistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadBDD\DAO\ReadDonneePrix.cs" />
     <Compile Include="ReadBDD\DAO\ReadDonneeStation.cs" />
+    <Compile Include="ReadBDD\DAO\ReadOutilsDonnees.cs" />
     <Compile Include="ReadBDD\Delegate\DelegateAffichagePrix.cs" />
     <Compile Include="ReadBDD\Delegate\DelegateMiseAjourBase.cs" />
+    <Compile Include="ReadBDD\Delegate\DelegateRecuperationOutilsDonnees.cs" />
+    <Compile Include="RecuperationOutilsDonnees.svc.cs">
+      <DependentUpon>RecuperationOutilsDonnees.svc</DependentUpon>
+    </Compile>
     <Compile Include="WriteBDD\DAO\WriteMiseAjourBaseXML.cs" />
   </ItemGroup>
   <ItemGroup>
