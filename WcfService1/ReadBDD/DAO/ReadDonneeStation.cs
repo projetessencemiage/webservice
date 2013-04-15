@@ -32,12 +32,14 @@ namespace WcfService1.ReadBDD.DAO
             MySqlConnection connection;
             try
             {
+                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
                 
                 cmd = connection.CreateCommand();
                 string requete = "Select station_id, station_adresse, station_cp, station_ville, station_tel, station_lat, station_long, station_id_enseigne, enseigne_marque From station Join enseigne on enseigne.enseigne_id = station.station_id_enseigne where station_cp = @codePostal";
+                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre station_cp = " + codePostal);
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@codePostal", codePostal);
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
@@ -64,9 +66,9 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
+                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
                 return null;
             }
-
             return listStation;
         }
 
@@ -134,6 +136,7 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
+                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
                 return null;
             }
             return listStation;
@@ -147,12 +150,14 @@ namespace WcfService1.ReadBDD.DAO
             MySqlConnection connection;
             try
             {
+                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
 
                 cmd = connection.CreateCommand();
                 string requete = "Select station_id, station_adresse, station_cp, station_ville, station_tel, station_lat, station_long, station_id_enseigne, enseigne_marque From station Join enseigne on enseigne.enseigne_id = station.station_id_enseigne where station_cp LIKE @departement";
+                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre departement = " + departement);
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@departement", departement+"%");
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
@@ -179,6 +184,7 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
+                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
                 return null;
             }
 
@@ -193,12 +199,14 @@ namespace WcfService1.ReadBDD.DAO
             MySqlConnection connection;
             try
             {
+                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
 
                 cmd = connection.CreateCommand();
                 string requete = "Select station_id, station_adresse, station_cp, station_ville, station_tel, station_lat, station_long, station_id_enseigne, enseigne_marque From station Join enseigne on enseigne.enseigne_id = station.station_id_enseigne where station_ville LIKE @ville";
+                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre ville = " + ville);
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@ville", ville);
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
@@ -225,6 +233,7 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
+                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
                 return null;
             }
 
