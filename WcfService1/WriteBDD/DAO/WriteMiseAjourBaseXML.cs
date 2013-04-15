@@ -21,7 +21,7 @@ namespace WcfService1.WriteBDD.DAO
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
         }
 
-        internal bool writeDonneesXML(List<Station> listStation)
+        public bool writeDonneesXML(List<Station> listStation)
         {
             MySqlConnection connection = new MySqlConnection(myConnectionString);
             MySqlCommand cmd;

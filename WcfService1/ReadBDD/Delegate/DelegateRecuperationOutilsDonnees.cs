@@ -20,5 +20,11 @@ namespace WcfService1.ReadBDD.Delegate
             RecuperationOutilsDonnees.logger.ecrireInfoLogger("Accès à daoReadOutilsDonnees.getIdAndTypeEssence()");
             return daoReadOutilsDonnees.getIdAndTypeEssence();
         }
+
+        public SortedList<int, string> getIdAndNomEnseigne()
+        {
+            RecuperationOutilsDonnees.logger.ecrireInfoLogger("Accès à daoReadOutilsDonnees.getIdAndNomEnseigne()");
+            return daoReadOutilsDonnees.getIdAndNomEnseigne();
+        }
     }
 }

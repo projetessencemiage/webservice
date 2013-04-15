@@ -28,5 +28,11 @@ namespace WcfService1
             logger.ecrireInfoLogger("Accès à delegateRecuperationOutilsDonnees.getIdAndTypeEssence()");
             return delegateRecuperationOutilsDonnees.getIdAndTypeEssence();
         }
+
+        public SortedList<int, string> getIdAndNomEnseigne()
+        {
+            logger.ecrireInfoLogger("Accès à delegateRecuperationOutilsDonnees.getIdAndNomEnseigne()");
+            return delegateRecuperationOutilsDonnees.getIdAndNomEnseigne();
+        }
     }
 }

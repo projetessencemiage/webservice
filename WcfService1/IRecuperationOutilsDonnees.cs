@@ -13,5 +13,8 @@ namespace WcfService1
     {
         [OperationContract]
         SortedList<int, string> getIdAndTypeEssence();
+
+        [OperationContract]
+        SortedList<int, string> getIdAndNomEnseigne();
     }
 }

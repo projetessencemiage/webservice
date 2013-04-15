@@ -62,5 +62,47 @@ namespace WcfService1.ReadBDD.DAO
             RecuperationOutilsDonnees.logger.ecrireInfoLogger("Retour de " + listIdAndTypeEssence.Count + " valeur avec ID pour l'essence.");
             return listIdAndTypeEssence;
         }
+
+        public SortedList<int, string> getIdAndNomEnseigne()
+        {
+            SortedList<int, string> listIdAndTypeEssence = new SortedList<int, string>();
+            DataSet ds = new DataSet();
+            MySqlConnection connection;
+            try
+            {
+                RecuperationOutilsDonnees.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
+                connection = new MySqlConnection(myConnectionString);
+                MySqlCommand cmd;
+                connection.Open();
+
+                cmd = connection.CreateCommand();
+                string requete = "Select enseigne_id, enseigne_marque From enseigne;";
+                RecuperationOutilsDonnees.logger.ecrireInfoLogger("Execution de la requete : " + requete);
+                cmd.CommandText = requete;
+                MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
+
+                adap.Fill(ds);
+
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    int type_id = Convert.ToInt32(dr["enseigne_id"].ToString());
+                    string type_nom = dr["enseigne_marque"].ToString();
+
+                    listIdAndTypeEssence.Add(type_id, type_nom);
+                }
+
+            }
+            catch (Exception e)
+            {
+                RecuperationOutilsDonnees.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
+                return null;
+            }
+            RecuperationOutilsDonnees.logger.ecrireInfoLogger("Retour de " + listIdAndTypeEssence.Count + " valeur avec ID pour l'enseigne.");
+            return listIdAndTypeEssence;
+        }
     }
 }
