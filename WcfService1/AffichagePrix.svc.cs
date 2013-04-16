@@ -25,9 +25,9 @@ namespace WcfService1
             logger = new Logger(ConfigurationManager.AppSettings["url_logger"], "AffichagePrix");
         }
 
-        public List<Station> GetPrixCodePostal(int codePostal)
+        public List<Station> GetPrixCodePostal(string codePostal)
         {
-            logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixCommune(int codePostal) avec codePostal = " + codePostal);
+            logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixCommune(string codePostal) avec codePostal = " + codePostal);
             return delegateAffichagePrix.getPrixCommune(codePostal);
         }
 
@@ -37,16 +37,16 @@ namespace WcfService1
             return delegateAffichagePrix.getPrixPosition(distance, longitude, latitude);
         }
 
-        public List<Station> GetPrixDepartement(int departement)
+        public List<Station> GetPrixDepartement(string departement)
         {
-            logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixDepartement(int codePostal) avec departement = " + departement);
+            logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixDepartement(string departement) avec departement = " + departement);
             return delegateAffichagePrix.getPrixDepartement(departement);
         }
 
-        public List<Station> GetPrixVille(string ville)
+        public List<Station> GetPrixVille(string ville, string departement)
         {
-            logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixVille(string ville) avec ville = " + ville);
-            return delegateAffichagePrix.getPrixVille(ville);
+            logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixVille(string ville, string codePostal) avec ville = " + ville + " & departement = " + departement);
+            return delegateAffichagePrix.getPrixVille(ville, departement);
         }
     }
 }

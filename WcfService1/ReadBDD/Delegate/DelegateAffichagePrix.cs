@@ -19,9 +19,9 @@ namespace WcfService1.ReadBDD.Delegate
             daoReadDonneeStation = new ReadDonneeStation();
         }
 
-        public List<Station> getPrixCommune(int codePostal)
+        public List<Station> getPrixCommune(string codePostal)
         {
-            AffichagePrix.logger.ecrireInfoLogger("Accès à daoReadDonneeStation.recupererStationCodePostalSansPrix(int codePostal) avec codePostal = " + codePostal);
+            AffichagePrix.logger.ecrireInfoLogger("Accès à daoReadDonneeStation.recupererStationCodePostalSansPrix(string codePostal) avec codePostal = " + codePostal);
             List<Station> listStation = daoReadDonneeStation.recupererStationCodePostalSansPrix(codePostal);
             if(listStation != null)
             {
@@ -51,9 +51,9 @@ namespace WcfService1.ReadBDD.Delegate
             return listStation;
         }
 
-        public List<Station> getPrixDepartement(int departement)
+        public List<Station> getPrixDepartement(string departement)
         {
-            AffichagePrix.logger.ecrireInfoLogger("Accès à daoReadDonneeStation.recupererStationCodePostalSansPrix(int departement) avec departement = " + departement);
+            AffichagePrix.logger.ecrireInfoLogger("Accès à daoReadDonneeStation.recupererStationDepartementSansPrix(string departement) avec departement = " + departement);
             List<Station> listStation = daoReadDonneeStation.recupererStationDepartementSansPrix(departement);
             if (listStation != null)
             {
@@ -67,10 +67,10 @@ namespace WcfService1.ReadBDD.Delegate
             return listStation;
         }
 
-        public List<Station> getPrixVille(string ville)
+        public List<Station> getPrixVille(string ville, string departement)
         {
-            AffichagePrix.logger.ecrireInfoLogger("Accès à daoReadDonneeStation.recupererStationCodePostalSansPrix(int departement) avec ville = " + ville);
-            List<Station> listStation = daoReadDonneeStation.recupererStationVilleSansPrix(ville);
+            AffichagePrix.logger.ecrireInfoLogger("Accès à daoReadDonneeStation.recupererStationVilleSansPrix(string ville, string departement) avec ville = " + ville + " & departement = " + departement);
+            List<Station> listStation = daoReadDonneeStation.recupererStationVilleSansPrix(ville, departement);
             if (listStation != null)
             {
                 foreach (Station uneStation in listStation)

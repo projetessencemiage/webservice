@@ -24,7 +24,7 @@ namespace WcfService1.ReadBDD.DAO
             myConnectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
         }
 
-        public List<Station> recupererStationCodePostalSansPrix(int codePostal)
+        public List<Station> recupererStationCodePostalSansPrix(string codePostal)
         {
             List<Station> listStation = null;
             DataSet ds = new DataSet();
@@ -60,7 +60,7 @@ namespace WcfService1.ReadBDD.DAO
                     float latitude = Single.Parse(dr["station_lat"].ToString().Replace(".", ","));
                     string id_enseigne = dr["station_id_enseigne"].ToString();
                     string enseigne_marque = dr["enseigne_marque"].ToString();
-                    listStation.Add(new Station(id_station, null, address, city, codePostal.ToString(), longitude, latitude, id_enseigne, enseigne_marque, tel));
+                    listStation.Add(new Station(id_station, null, address, city, codePostal, longitude, latitude, id_enseigne, enseigne_marque, tel));
                 }
 
             }
@@ -125,7 +125,7 @@ namespace WcfService1.ReadBDD.DAO
                     string id_enseigne = dr["station_id_enseigne"].ToString();
                     string enseigne_marque = dr["enseigne_marque"].ToString();
                     double distanceAvecPosition = CalculDistance.getDistance(lat_station, long_station, latitude, longitude);
-                    if (distanceAvecPosition <= System.Convert.ToDouble(distance))
+                    if (distanceAvecPosition <= Convert.ToDouble(distance))
                     {
                         listStation.Add(new StationAndDistance(
                             new Station(id_station, null, address, city, codePostal, long_station, lat_station, id_enseigne, enseigne_marque, tel),
@@ -142,7 +142,7 @@ namespace WcfService1.ReadBDD.DAO
             return listStation;
         }
 
-        public List<Station> recupererStationDepartementSansPrix(int departement)
+        public List<Station> recupererStationDepartementSansPrix(string departement)
         {
             List<Station> listStation = null;
             DataSet ds = new DataSet();
@@ -191,7 +191,7 @@ namespace WcfService1.ReadBDD.DAO
             return listStation;
         }
 
-        public List<Station> recupererStationVilleSansPrix(string ville)
+        public List<Station> recupererStationVilleSansPrix(string ville, string departement)
         {
             List<Station> listStation = null;
             DataSet ds = new DataSet();
@@ -205,10 +205,11 @@ namespace WcfService1.ReadBDD.DAO
                 connection.Open();
 
                 cmd = connection.CreateCommand();
-                string requete = "Select station_id, station_adresse, station_cp, station_ville, station_tel, station_lat, station_long, station_id_enseigne, enseigne_marque From station Join enseigne on enseigne.enseigne_id = station.station_id_enseigne where station_ville LIKE @ville";
-                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre ville = " + ville);
+                string requete = "Select station_id, station_adresse, station_cp, station_ville, station_tel, station_lat, station_long, station_id_enseigne, enseigne_marque From station Join enseigne on enseigne.enseigne_id = station.station_id_enseigne where station_ville LIKE @ville AND station_cp LIKE @departement";
+                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre ville = " + ville + " & departement = " + departement);
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@ville", ville);
+                cmd.Parameters.AddWithValue("@departement", departement + "%");
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
                 adap.Fill(ds);
 

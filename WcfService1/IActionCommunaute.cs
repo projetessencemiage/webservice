@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FuelTracker_Lib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -14,5 +15,11 @@ namespace WcfService1
     {
         [OperationContract]
         ReponseUpdateBase PushPrice(string id_station, int id_price, double price);
+
+        [OperationContract]
+        ReponseUpdateBase PushStationWithAddress(string address, string code_postal, string city, string tel, int id_enseigne, List<Prix> price_list);
+
+        [OperationContract]
+        ReponseUpdateBase PushStationWithGPS(string tel, double latitude, double longitude, int id_enseigne, List<Prix> price_list);
     }
 }

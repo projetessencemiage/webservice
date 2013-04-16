@@ -14,13 +14,13 @@ namespace WcfService1
     public interface IAffichagePrix
     {
         [OperationContract]
-        List<Station> GetPrixCodePostal(int codePostal);
+        List<Station> GetPrixCodePostal(string codePostal);
 
         [OperationContract]
-        List<Station> GetPrixDepartement(int departement);
+        List<Station> GetPrixDepartement(string departement);
 
         [OperationContract]
-        List<Station> GetPrixVille(string ville);
+        List<Station> GetPrixVille(string ville, string departement);
 
         [OperationContract]
         List<StationAndDistance> GetPrixPosition(int distance, float longitude, float latitude);
