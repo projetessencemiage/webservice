@@ -45,7 +45,7 @@ namespace Logger_Lib
             }
             else
             {
-                string file_s = dir + "logger_" + DateTime.Now.ToString().Replace(" ", "_").Replace("/", "") + "_" + classe + ".txt";
+                string file_s = dir + "logger_" + DateTime.Now.ToString().Replace(" ", "_").Replace("/", "").Replace(":", "") + "_" + classe + ".txt";
                 files.Add(file_s);
                 System.IO.File.AppendAllText(files.Last(), "");
                 System.IO.File.AppendAllText(files.Last(), infoFormate);
