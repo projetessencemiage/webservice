@@ -29,6 +29,7 @@ namespace WcfService1
 
         public ReponseUpdateBase PushPrice(string id_station, int id_price, double price)
         {
+            logger.ecrireInfoLogger("Appel web service avec : id_station = " + id_station + " & id_price = " + id_price + " & price = " + price);
             if (id_station != null && !id_station.Equals("") && price != 0)
             {
                 logger.ecrireInfoLogger("Accès à delegateActionCommunaute.pushPrice(string id_station, int id_price, double price) avec id_station = " + id_station + " & id_price = " + id_price + " & price = " + price);

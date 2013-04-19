@@ -31,10 +31,10 @@ namespace WcfService1
             return delegateAffichagePrix.getPrixCommune(codePostal);
         }
 
-        public List<StationAndDistance> GetPrixPosition(int distance, float longitude, float latitude)
+        public List<StationAndDistance> GetPrixPosition(string distance, string longitude, string latitude)
         {
             logger.ecrireInfoLogger("Accès à delegateAffichagePrix.getPrixPosition(int distance, float longitude, float latitude) avec distance = " + distance + " & longitude = " + longitude + " & latitude = " + latitude);
-            return delegateAffichagePrix.getPrixPosition(distance, longitude, latitude);
+            return delegateAffichagePrix.getPrixPosition(Convert.ToInt32(distance), Single.Parse(longitude.Replace(".", ",")), Single.Parse(latitude.Replace(".", ",")));
         }
 
         public List<Station> GetPrixDepartement(string departement)

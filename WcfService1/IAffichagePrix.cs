@@ -23,6 +23,6 @@ namespace WcfService1
         List<Station> GetPrixVille(string ville, string departement);
 
         [OperationContract]
-        List<StationAndDistance> GetPrixPosition(int distance, float longitude, float latitude);
+        List<StationAndDistance> GetPrixPosition(string distance, string longitude, string latitude);
     }
 }
