@@ -1,6 +1,7 @@
 ﻿using FuelTracker_Lib;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Device.Location;
 using System.Globalization;
 using System.IO;
@@ -18,22 +19,31 @@ namespace WcfService1.WriteBDD.Delegate
     {
         private WriteActionCommunaute daoWriteActionCommunaute;
         private DictionnaireReponseUpdateBase drub;
+        private bool activationActionCommunaute;
 
         public DelegateActionCommunaute()
         {
             daoWriteActionCommunaute = new WriteActionCommunaute();
             drub = new DictionnaireReponseUpdateBase();
+            try
+            {
+                activationActionCommunaute = Convert.ToBoolean(ConfigurationManager.AppSettings["activationActionCommunaute"]);
+            }
+            catch (FormatException e)
+            {
+                activationActionCommunaute = false;
+            }
         }
 
         public ReponseUpdateBase pushPrice(string id_station, int id_price, double price)
         {
-            ActionCommunaute.logger.ecrireInfoLogger("Accès à daoWriteActionCommunaute.writePushPrice(string id_station, int id_price, double price) avec id_station = " + id_station + " & id_price = " + id_price + " & price = " + price);
+            ActionCommunaute.logger.ecrireInfoLogger("Accès à daoWriteActionCommunaute.writePushPrice(string id_station, int id_price, double price) avec id_station = " + id_station + " & id_price = " + id_price + " & price = " + price, activationActionCommunaute);
             return daoWriteActionCommunaute.writePushPrice(id_station, id_price, price);
         }
 
         public ReponseUpdateBase pushStationGPS(string tel, double latitude, double longitude, int id_enseigne, List<Prix> price_list)
         {
-            ActionCommunaute.logger.ecrireInfoLogger("Recuperation XML via l'adresse http://maps.googleapis.com/maps/api/geocode/xml?latlng=" + latitude + "," + longitude + "&sensor=false");
+            ActionCommunaute.logger.ecrireInfoLogger("Recuperation XML via l'adresse http://maps.googleapis.com/maps/api/geocode/xml?latlng=" + latitude + "," + longitude + "&sensor=false", activationActionCommunaute);
             XmlNodeList nodeList = recupererAdresseGeo("http://maps.googleapis.com/maps/api/geocode/xml?latlng=" + latitude.ToString().Replace(",", ".") + "," + longitude.ToString().Replace(",", ".") + "&sensor=false");
             string address = "";
             string city = "";
@@ -47,7 +57,7 @@ namespace WcfService1.WriteBDD.Delegate
                 code_postal = address_component[address_component.Count-1].SelectNodes("long_name").Item(0).InnerText;
 
                 ActionCommunaute.logger.ecrireInfoLogger("Accès à daoWriteActionCommunaute.writePushStation(string address, string code_postal, string city, string tel, double latitude, double longitude, int id_enseigne, List<Prix> price_list) avec address = " + address + " & code_postal = " + code_postal + " & city = " + city + " & tel = " + tel + " & latitude = " + latitude +
-                    " & longitude = " + longitude + " & id_enseigne = " + id_enseigne + " & price_list = " + price_list.ToString());
+                    " & longitude = " + longitude + " & id_enseigne = " + id_enseigne + " & price_list = " + price_list.ToString(), activationActionCommunaute);
                 return daoWriteActionCommunaute.writePushStation(address, code_postal, city, tel, latitude, longitude, id_enseigne, price_list);
             }
             return drub.getReponseUdateBase(6);
@@ -77,7 +87,7 @@ namespace WcfService1.WriteBDD.Delegate
 
         public ReponseUpdateBase pushStationAdress(string address, string code_postal, string city, string tel, int id_enseigne, List<Prix> price_list)
         {
-            ActionCommunaute.logger.ecrireInfoLogger("Recuperation XML via l'adresse http://maps.googleapis.com/maps/api/geocode/xml?address=" + address.Replace(" ", "+") + "," + code_postal + "," + city.Replace(" ", "+") + "&sensor=false");
+            ActionCommunaute.logger.ecrireInfoLogger("Recuperation XML via l'adresse http://maps.googleapis.com/maps/api/geocode/xml?address=" + address.Replace(" ", "+") + "," + code_postal + "," + city.Replace(" ", "+") + "&sensor=false", activationActionCommunaute);
             XmlNodeList nodeList = recupererAdresseGeo("http://maps.googleapis.com/maps/api/geocode/xml?address=" + address.Replace(" ", "+") + "," + code_postal + "," + city.Replace(" ", "+") + "&sensor=false");
             double latitude = 0;
             double longitude = 0;
@@ -88,7 +98,7 @@ namespace WcfService1.WriteBDD.Delegate
                 latitude = Convert.ToDouble(location[0].SelectNodes("lat").Item(0).InnerText.ToString().Replace(".", ","));
                 longitude = Convert.ToDouble(location[0].SelectNodes("lng").Item(0).InnerText.ToString().Replace(".", ","));
                 ActionCommunaute.logger.ecrireInfoLogger("Accès à daoWriteActionCommunaute.writePushStation(string address, string code_postal, string city, string tel, double latitude, double longitude, int id_enseigne, List<Prix> price_list) avec address = " + address + " & code_postal = " + code_postal + " & city = " + city + " & tel = " + tel + " & latitude = " + latitude +
-                    " & longitude = " + longitude + " & id_enseigne = " + id_enseigne + " & price_list = " + price_list.ToString());
+                    " & longitude = " + longitude + " & id_enseigne = " + id_enseigne + " & price_list = " + price_list.ToString(), activationActionCommunaute);
                 return daoWriteActionCommunaute.writePushStation(address, code_postal, city, tel, latitude, longitude, id_enseigne, price_list);
             }
             return drub.getReponseUdateBase(7);

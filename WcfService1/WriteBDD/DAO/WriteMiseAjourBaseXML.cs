@@ -67,7 +67,7 @@ namespace WcfService1.WriteBDD.DAO
             }
             catch (Exception e)
             {
-                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
+                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace, true);
                 return false;
             }
             finally

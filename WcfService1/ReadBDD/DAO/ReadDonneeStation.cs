@@ -15,6 +15,7 @@ namespace WcfService1.ReadBDD.DAO
     public class ReadDonneeStation
     {
         private string myConnectionString;
+        private bool activationReadStation;
         public ReadDonneeStation()
         {
             string server = ConfigurationManager.AppSettings["server"];
@@ -22,6 +23,14 @@ namespace WcfService1.ReadBDD.DAO
             string uid = ConfigurationManager.AppSettings["uid"];
             string password = ConfigurationManager.AppSettings["password"];
             myConnectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            try
+            {
+                activationReadStation = Convert.ToBoolean(ConfigurationManager.AppSettings["activationReadStation"]);
+            }
+            catch (FormatException e)
+            {
+                activationReadStation = false;
+            }
         }
 
         public List<Station> recupererStationCodePostalSansPrix(string codePostal)
@@ -32,14 +41,14 @@ namespace WcfService1.ReadBDD.DAO
             MySqlConnection connection;
             try
             {
-                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
+                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationReadStation);
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
                 
                 cmd = connection.CreateCommand();
                 string requete = "Select station_id, station_adresse, station_cp, station_ville, station_tel, station_lat, station_long, station_id_enseigne, enseigne_marque From station Join enseigne on enseigne.enseigne_id = station.station_id_enseigne where station_cp = @codePostal";
-                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre station_cp = " + codePostal);
+                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre station_cp = " + codePostal, activationReadStation);
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@codePostal", codePostal);
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
@@ -66,7 +75,7 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
-                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
+                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace, true);
                 return null;
             }
             return listStation;
@@ -91,14 +100,14 @@ namespace WcfService1.ReadBDD.DAO
             MySqlConnection connection;
             try
             {
-                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
+                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationReadStation);
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
 
                 cmd = connection.CreateCommand();
                 string requete = "Select station_id, station_adresse, station_cp, station_ville, station_tel, station_lat, station_long, station_id_enseigne, enseigne_marque From station Join enseigne on enseigne.enseigne_id = station.station_id_enseigne where station_lat BETWEEN @lat_min AND @lat_max AND station_long BETWEEN @long_min AND @long_max";
-                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec les parametres lat_min = " + lat_min + " & lat_max = " + lat_max + " & long_min = " + long_min + " & long_max = " + long_max);
+                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec les parametres lat_min = " + lat_min + " & lat_max = " + lat_max + " & long_min = " + long_min + " & long_max = " + long_max, activationReadStation);
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@lat_min", lat_min);
                 cmd.Parameters.AddWithValue("@lat_max", lat_max);
@@ -136,7 +145,7 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
-                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
+                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace, true);
                 return null;
             }
             return listStation;
@@ -150,14 +159,14 @@ namespace WcfService1.ReadBDD.DAO
             MySqlConnection connection;
             try
             {
-                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
+                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationReadStation);
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
 
                 cmd = connection.CreateCommand();
                 string requete = "Select station_id, station_adresse, station_cp, station_ville, station_tel, station_lat, station_long, station_id_enseigne, enseigne_marque From station Join enseigne on enseigne.enseigne_id = station.station_id_enseigne where station_cp LIKE @departement";
-                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre departement = " + departement);
+                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre departement = " + departement, activationReadStation);
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@departement", departement+"%");
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
@@ -184,7 +193,7 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
-                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
+                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace, true);
                 return null;
             }
 
@@ -199,14 +208,14 @@ namespace WcfService1.ReadBDD.DAO
             MySqlConnection connection;
             try
             {
-                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
+                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationReadStation);
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
 
                 cmd = connection.CreateCommand();
                 string requete = "Select station_id, station_adresse, station_cp, station_ville, station_tel, station_lat, station_long, station_id_enseigne, enseigne_marque From station Join enseigne on enseigne.enseigne_id = station.station_id_enseigne where station_ville LIKE @ville AND station_cp LIKE @departement";
-                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre ville = " + ville + " & departement = " + departement);
+                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre ville = " + ville + " & departement = " + departement, activationReadStation);
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@ville", ville);
                 cmd.Parameters.AddWithValue("@departement", departement + "%");
@@ -234,7 +243,7 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
-                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
+                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace, true);
                 return null;
             }
 

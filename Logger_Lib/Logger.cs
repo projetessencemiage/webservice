@@ -34,21 +34,24 @@ namespace Logger_Lib
             dir = fileListing.ToString();
         }
 
-        public void ecrireInfoLogger(string info)
+        public void ecrireInfoLogger(string info, bool activation)
         {
-            string infoFormate = DateTime.Now.ToString() + " : " + info + "\n";
-            FileInfo f = new FileInfo(files.Last());
-            long taille = f.Length;
-            if (taille < 1048576)
+            if (activation)
             {
-                System.IO.File.AppendAllText(files.Last(), infoFormate);
-            }
-            else
-            {
-                string file_s = dir + "logger_" + DateTime.Now.ToString().Replace(" ", "_").Replace("/", "").Replace(":", "") + "_" + classe + ".txt";
-                files.Add(file_s);
-                System.IO.File.AppendAllText(files.Last(), "");
-                System.IO.File.AppendAllText(files.Last(), infoFormate);
+                string infoFormate = DateTime.Now.ToString() + " : " + info + "\n";
+                FileInfo f = new FileInfo(files.Last());
+                long taille = f.Length;
+                if (taille < 1048576)
+                {
+                    System.IO.File.AppendAllText(files.Last(), infoFormate);
+                }
+                else
+                {
+                    string file_s = dir + "logger_" + DateTime.Now.ToString().Replace(" ", "_").Replace("/", "").Replace(":", "") + "_" + classe + ".txt";
+                    files.Add(file_s);
+                    System.IO.File.AppendAllText(files.Last(), "");
+                    System.IO.File.AppendAllText(files.Last(), infoFormate);
+                }
             }
         }
     }

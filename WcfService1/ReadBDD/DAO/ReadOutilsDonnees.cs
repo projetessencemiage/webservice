@@ -11,6 +11,7 @@ namespace WcfService1.ReadBDD.DAO
     public class ReadOutilsDonnees
     {
         private string myConnectionString;
+        private bool activationRecuperationOutils;
         public ReadOutilsDonnees()
         {
             string server = ConfigurationManager.AppSettings["server"];
@@ -19,6 +20,14 @@ namespace WcfService1.ReadBDD.DAO
             string password = ConfigurationManager.AppSettings["password"];
             myConnectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            try
+            {
+                activationRecuperationOutils = Convert.ToBoolean(ConfigurationManager.AppSettings["activationRecuperationOutils"]);
+            }
+            catch (FormatException e)
+            {
+                activationRecuperationOutils = false;
+            }
         }
 
         public SortedList<int, string> getIdAndTypeEssence()
@@ -28,14 +37,14 @@ namespace WcfService1.ReadBDD.DAO
             MySqlConnection connection;
             try
             {
-                RecuperationOutilsDonnees.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
+                RecuperationOutilsDonnees.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationRecuperationOutils);
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
 
                 cmd = connection.CreateCommand();
                 string requete = "Select type_id, type_nom From type;";
-                RecuperationOutilsDonnees.logger.ecrireInfoLogger("Execution de la requete : " + requete);
+                RecuperationOutilsDonnees.logger.ecrireInfoLogger("Execution de la requete : " + requete, activationRecuperationOutils);
                 cmd.CommandText = requete;
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
 
@@ -56,10 +65,10 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
-                RecuperationOutilsDonnees.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
+                RecuperationOutilsDonnees.logger.ecrireInfoLogger("ERROR : " + e.StackTrace, true);
                 return null;
             }
-            RecuperationOutilsDonnees.logger.ecrireInfoLogger("Retour de " + listIdAndTypeEssence.Count + " valeur avec ID pour l'essence.");
+            RecuperationOutilsDonnees.logger.ecrireInfoLogger("Retour de " + listIdAndTypeEssence.Count + " valeur avec ID pour l'essence.", activationRecuperationOutils);
             return listIdAndTypeEssence;
         }
 
@@ -70,14 +79,14 @@ namespace WcfService1.ReadBDD.DAO
             MySqlConnection connection;
             try
             {
-                RecuperationOutilsDonnees.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString);
+                RecuperationOutilsDonnees.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationRecuperationOutils);
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
 
                 cmd = connection.CreateCommand();
                 string requete = "Select enseigne_id, enseigne_marque From enseigne;";
-                RecuperationOutilsDonnees.logger.ecrireInfoLogger("Execution de la requete : " + requete);
+                RecuperationOutilsDonnees.logger.ecrireInfoLogger("Execution de la requete : " + requete, activationRecuperationOutils);
                 cmd.CommandText = requete;
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
 
@@ -98,10 +107,10 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
-                RecuperationOutilsDonnees.logger.ecrireInfoLogger("ERROR : " + e.StackTrace);
+                RecuperationOutilsDonnees.logger.ecrireInfoLogger("ERROR : " + e.StackTrace, true);
                 return null;
             }
-            RecuperationOutilsDonnees.logger.ecrireInfoLogger("Retour de " + listIdAndTypeEssence.Count + " valeur avec ID pour l'enseigne.");
+            RecuperationOutilsDonnees.logger.ecrireInfoLogger("Retour de " + listIdAndTypeEssence.Count + " valeur avec ID pour l'enseigne.", activationRecuperationOutils);
             return listIdAndTypeEssence;
         }
     }

@@ -16,22 +16,31 @@ namespace WcfService1
     {
         private DelegateRecuperationOutilsDonnees delegateRecuperationOutilsDonnees;
         public static Logger logger;
+        private bool activationRecuperationOutils;
 
         public RecuperationOutilsDonnees()
         {
             delegateRecuperationOutilsDonnees = new DelegateRecuperationOutilsDonnees();
             logger = new Logger(ConfigurationManager.AppSettings["url_logger"], "RecuperationOutilsDonnees");
+            try
+            {
+                activationRecuperationOutils = Convert.ToBoolean(ConfigurationManager.AppSettings["activationRecuperationOutils"]);
+            }
+            catch (FormatException e)
+            {
+                activationRecuperationOutils = false;
+            }
         }
 
         public SortedList<int, string> getIdAndTypeEssence()
         {
-            logger.ecrireInfoLogger("Accès à delegateRecuperationOutilsDonnees.getIdAndTypeEssence()");
+            logger.ecrireInfoLogger("Accès à delegateRecuperationOutilsDonnees.getIdAndTypeEssence()", activationRecuperationOutils);
             return delegateRecuperationOutilsDonnees.getIdAndTypeEssence();
         }
 
         public SortedList<int, string> getIdAndNomEnseigne()
         {
-            logger.ecrireInfoLogger("Accès à delegateRecuperationOutilsDonnees.getIdAndNomEnseigne()");
+            logger.ecrireInfoLogger("Accès à delegateRecuperationOutilsDonnees.getIdAndNomEnseigne()", activationRecuperationOutils);
             return delegateRecuperationOutilsDonnees.getIdAndNomEnseigne();
         }
     }
