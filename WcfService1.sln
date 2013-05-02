@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocalisation_Lib", "Geol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger_Lib", "Logger_Lib\Logger_Lib.csproj", "{5EF739C0-1C2C-43B5-8041-B3BF89EA84A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User_Lib", "ClassLibrary2\User_Lib.csproj", "{22C74EF2-0ED9-42C7-845C-10D0D138D843}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{5EF739C0-1C2C-43B5-8041-B3BF89EA84A5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{5EF739C0-1C2C-43B5-8041-B3BF89EA84A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EF739C0-1C2C-43B5-8041-B3BF89EA84A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C74EF2-0ED9-42C7-845C-10D0D138D843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C74EF2-0ED9-42C7-845C-10D0D138D843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C74EF2-0ED9-42C7-845C-10D0D138D843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C74EF2-0ED9-42C7-845C-10D0D138D843}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

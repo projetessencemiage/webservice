@@ -23,6 +23,10 @@ namespace WcfService1.Outil
             reponseUpdateBase.Add(5, new ReponseUpdateBase("Station crée, mais l'insertion de certains prix ont échoué. L'ensemble des opérations n'ont pas pu être annulées.", false));
             reponseUpdateBase.Add(6, new ReponseUpdateBase("Impossible de convertir les données GPS en adresse", false));
             reponseUpdateBase.Add(7, new ReponseUpdateBase("Impossible de convertir l'adresse en coordonnée GPS", false));
+            reponseUpdateBase.Add(8, new ReponseUpdateBase("Les données transmisent au service sont incorrectes", false));
+            reponseUpdateBase.Add(9, new ReponseUpdateBase("Utilisateur enregistré", true));
+            reponseUpdateBase.Add(10, new ReponseUpdateBase("Impossible de créer l'utilisateur", true));
+            reponseUpdateBase.Add(11, new ReponseUpdateBase("Ce pseudo est déjà utilisé", false));
         }
 
         public ReponseUpdateBase getReponseUdateBase(int id)

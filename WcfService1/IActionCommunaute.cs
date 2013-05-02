@@ -14,12 +14,12 @@ namespace WcfService1
     public interface IActionCommunaute
     {
         [OperationContract]
-        ReponseUpdateBase PushPrice(string id_station, int id_price, double price);
+        ReponseUpdateBase PushPrice(string id_station, string id_price, string price);
 
         [OperationContract]
-        ReponseUpdateBase PushStationWithAddress(string address, string code_postal, string city, string tel, int id_enseigne, List<Prix> price_list);
+        ReponseUpdateBase PushStationWithAddress(string address, string code_postal, string city, string tel, string id_enseigne, List<Prix> price_list);
 
         [OperationContract]
-        ReponseUpdateBase PushStationWithGPS(string tel, double latitude, double longitude, int id_enseigne, List<Prix> price_list);
+        ReponseUpdateBase PushStationWithGPS(string tel, string latitude, string longitude, string id_enseigne, List<Prix> price_list);
     }
 }
