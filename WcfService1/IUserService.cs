@@ -14,9 +14,9 @@ namespace WcfService1
     public interface IUserService
     {
         [OperationContract]
-        ReponseUpdateBase InscriptionUser(string string_id_Role, string nom, string prenom, string pseudo, string email, string mdp, string adresse, string code_postal, string ville, string url_avatar, string string_id_station_favorite, string string_id_carburant_pref);
+        ReponseUpdateBase InscriptionUser(string nom, string prenom, string pseudo, string email, string mdp, string adresse, string code_postal, string ville, string url_avatar, string string_id_station_favorite, string string_id_carburant_pref);
 
-        /*S[OperationContract]
-        User Identification(string identifiant, string mdp);*/
+        [OperationContract]
+        ReponseConnectionUser Identification(string identifiant, string mdp);
     }
 }

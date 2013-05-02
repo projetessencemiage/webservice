@@ -81,8 +81,11 @@
     <Compile Include="AjoutDonneesAdmin.svc.cs">
       <DependentUpon>AjoutDonneesAdmin.svc</DependentUpon>
     </Compile>
+    <Compile Include="Outil\ReponseConnectionUser.cs" />
+    <Compile Include="ReadBDD\DAO\ReadUserService.cs" />
+    <Compile Include="ReadBDD\Delegate\DelegateReadUserInfo.cs" />
     <Compile Include="WriteBDD\DAO\WriteUserService.cs" />
-    <Compile Include="WriteBDD\Delegate\DelegateUserService.cs" />
+    <Compile Include="WriteBDD\Delegate\DelegateEcritureUserService.cs" />
     <Compile Include="IActionCommunaute.cs" />
     <Compile Include="IAffichagePrix.cs" />
     <Compile Include="IAjoutDonneesAdmin.cs" />

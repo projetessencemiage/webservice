@@ -1,24 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace User_Lib
 {
+    [DataContract]
     public class User
     {
+        [DataMember]
         public Role role;
+        [DataMember]
         public string nom;
+        [DataMember]
         public string prenom;
+        [DataMember]
         public string pseudo;
+        [DataMember]
         public string adresse;
+        [DataMember]
         public string code_postal;
+        [DataMember]
         public string ville;
+        [DataMember]
         public string mdp;
+        [DataMember]
         public string avatar;
+        [DataMember]
         public string email;
+        [DataMember]
         public int id_station_favorite;
+        [DataMember]
         public int id_carburant_pref;
 
 

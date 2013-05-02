@@ -42,16 +42,14 @@ namespace WcfService1.WriteBDD.DAO
         {
             MySqlConnection connection = new MySqlConnection(myConnectionString);
             MySqlCommand cmd;
-            DataSet ds = new DataSet();
-            string id_user = null;
+            int ligneMiseAjour = 0;
 
             try
             {
                 UserService.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationUserService);
                 connection = new MySqlConnection(myConnectionString);
                 cmd = connection.CreateCommand();
-                cmd.CommandText = "Insert into test.user(pseudo, nom, prenom, email, mdp, adresse, code_postal, ville, url_avatar, id_station_favorite, id_carburant_favorite, id_role)"
-                 + "VALUES(@pseudo, @nom, @prenom, @email, @mdp, @adresse, @code_postal, @ville, @url_avatar, @id_station_favorite, @id_carburant_pref, @idRole);SELECT LAST_INSERT_ID();commit;";
+                cmd.CommandText = "Insert into test.user(pseudo, nom, prenom, email, mdp, adresse, code_postal, ville, url_avatar, id_station_favorite, id_carburant_favorite, id_role)VALUES(@pseudo, @nom, @prenom, @email, @mdp, @adresse, @code_postal, @ville, @url_avatar, @id_station_favorite, @id_carburant_pref, @idRole);commit;";
                 UserService.logger.ecrireInfoLogger("Execution de la requete : " + cmd.CommandText 
                     + " avec les parametres idRole =" + idRole + " & nom = " + nom + " & prenom = " + prenom + " & pseudo = " + pseudo + " & email = " + email
                     + " & mdp = " + mdp + " & adresse = " + adresse + " & code_postal = " + code_postal + " & ville = " + ville + " & url_avatar = " + url_avatar + " & id_station_favorite = " + id_station_favorite + " & id_carburant_favorite = " + id_carburant_pref, activationUserService);
@@ -69,16 +67,7 @@ namespace WcfService1.WriteBDD.DAO
                 cmd.Parameters.AddWithValue("@id_carburant_pref", id_carburant_pref);
                 cmd.Parameters.AddWithValue("@idRole", idRole);
 
-                MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
-
-                adap.Fill(ds);
-                if(ds.Tables.Count > 0)
-                {
-                    foreach (DataRow dr in ds.Tables[0].Rows)
-                    {
-                        id_user = dr.ItemArray[0].ToString();
-                    }
-                }
+                ligneMiseAjour = cmd.ExecuteNonQuery();
             }
             catch (Exception e)
             {
@@ -99,7 +88,7 @@ namespace WcfService1.WriteBDD.DAO
                     connection.Close();
                 }
             }
-            if (id_user != null)
+            if (ligneMiseAjour > 0)
             {
                 return drub.getReponseUdateBase(9);
             }
@@ -107,11 +96,6 @@ namespace WcfService1.WriteBDD.DAO
             {
                 return drub.getReponseUdateBase(10);
             }
-        }
-
-        internal User identificationUser(string identifiant, string mdp)
-        {
-            throw new NotImplementedException();
         }
     }
 }

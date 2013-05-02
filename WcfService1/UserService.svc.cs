@@ -8,6 +8,7 @@ using System.ServiceModel;
 using System.Text;
 using User_Lib;
 using WcfService1.Outil;
+using WcfService1.ReadBDD.Delegate;
 
 namespace WcfService1
 {
@@ -15,7 +16,8 @@ namespace WcfService1
     // REMARQUE : pour lancer le client test WCF afin de tester ce service, sélectionnez UserService.svc ou UserService.svc.cs dans l'Explorateur de solutions et démarrez le débogage.
     public class UserService : IUserService
     {
-        private DelegateUserService delegateUserService;
+        private DelegateEcritureUserService delegateEcritureUserService;
+        private DelegateReadUserInfo delegateReadUserInfo;
         public static Logger logger;
         private bool activationUserService;
         private DictionnaireReponseUpdateBase drub;
@@ -23,7 +25,8 @@ namespace WcfService1
 
         public UserService()
         {
-            delegateUserService = new DelegateUserService();
+            delegateEcritureUserService = new DelegateEcritureUserService();
+            delegateReadUserInfo = new DelegateReadUserInfo();
             drub = new DictionnaireReponseUpdateBase();
             logger = new Logger(ConfigurationManager.AppSettings["url_logger"], "InscriptionUser");
             try
@@ -58,17 +61,17 @@ namespace WcfService1
             }
             if (idRole > -1 && !pseudo.Equals("") && !email.Equals("") && !mdp.Equals(""))
             {
-                return delegateUserService.inscriptionUser(idRole, nom, prenom, pseudo, email, mdp, adresse, code_postal, ville, url_avatar, id_station_favorite, id_carburant_pref);
+                return delegateEcritureUserService.inscriptionUser(idRole, nom, prenom, pseudo, email, mdp, adresse, code_postal, ville, url_avatar, id_station_favorite, id_carburant_pref);
             }
             return drub.getReponseUdateBase(8);
         }
 
-        public User Identification(string identifiant, string mdp)
+        public ReponseConnectionUser Identification(string identifiant, string mdp)
         {
             logger.ecrireInfoLogger("Accès aux services IdentificationUser.", activationUserService);
             if (!identifiant.Equals("") && !mdp.Equals(""))
             {
-                return delegateUserService.identificationUser(identifiant, mdp);
+                return delegateReadUserInfo.identificationUser(identifiant, mdp);
             }
             return null;
         }
