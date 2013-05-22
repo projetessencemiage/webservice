@@ -11,14 +11,13 @@ namespace WcfService1.ReadBDD.Delegate
 {
     public class DelegateAffichagePrix
     {
-        private ReadDonneePrix daoReadDonneePrix;
+        
         private ReadDonneeStation daoReadDonneeStation;
         private bool activationReadStation;
-        private bool activationReadPrix;
+        private DelegateRecuperationPrixStation delegateRecuperationPrixStation;
 
         public DelegateAffichagePrix()
         {
-            daoReadDonneePrix = new ReadDonneePrix();
             daoReadDonneeStation = new ReadDonneeStation();
             try
             {
@@ -28,14 +27,7 @@ namespace WcfService1.ReadBDD.Delegate
             {
                 activationReadStation = false;
             }
-            try
-            {
-                activationReadPrix = Convert.ToBoolean(ConfigurationManager.AppSettings["activationReadPrix"]);
-            }
-            catch (FormatException e)
-            {
-                activationReadPrix = false;
-            }
+            delegateRecuperationPrixStation = new DelegateRecuperationPrixStation();
         }
 
         public List<Station> getPrixCommune(string codePostal)
@@ -44,11 +36,7 @@ namespace WcfService1.ReadBDD.Delegate
             List<Station> listStation = daoReadDonneeStation.recupererStationCodePostalSansPrix(codePostal);
             if(listStation != null)
             {
-                foreach(Station uneStation in listStation)
-                {
-                    AffichagePrix.logger.ecrireInfoLogger("Accès à daoReadDonneePrix.readPrixByStation(Station uneStation) avec uneStation = " + uneStation.getIdStation(), activationReadPrix);
-                    uneStation.setPrice(daoReadDonneePrix.readPrixByStation(uneStation.getIdStation()));
-                }
+                listStation = delegateRecuperationPrixStation.recupererPrixStation(listStation);
                 AffichagePrix.logger.ecrireInfoLogger("Le nombre de station récupéré est de : " + listStation.Count, activationReadStation);
             }
             return listStation;
@@ -60,11 +48,7 @@ namespace WcfService1.ReadBDD.Delegate
             List<StationAndDistance> listStation = daoReadDonneeStation.recupererStationParRapportPosition(distance, longitude, latitude);
             if (listStation != null)
             {
-                foreach (StationAndDistance uneStationAndDistance in listStation)
-                {
-                    AffichagePrix.logger.ecrireInfoLogger("Accès à daoReadDonneePrix.readPrixByStation(Station uneStation) avec uneStation = " + uneStationAndDistance.getIdStation(), activationReadPrix);
-                    uneStationAndDistance.setPrice(daoReadDonneePrix.readPrixByStation(uneStationAndDistance.getIdStation()));
-                }
+                listStation = delegateRecuperationPrixStation.recupererPrixStationAndDistance(listStation);
                 AffichagePrix.logger.ecrireInfoLogger("Le nombre de station récupéré est de : " + listStation.Count, activationReadStation);
             }
             return listStation;
@@ -76,11 +60,7 @@ namespace WcfService1.ReadBDD.Delegate
             List<Station> listStation = daoReadDonneeStation.recupererStationDepartementSansPrix(departement);
             if (listStation != null)
             {
-                foreach (Station uneStation in listStation)
-                {
-                    AffichagePrix.logger.ecrireInfoLogger("Accès à daoReadDonneePrix.readPrixByStation(Station uneStation) avec uneStation = " + uneStation.getIdStation(), activationReadPrix);
-                    uneStation.setPrice(daoReadDonneePrix.readPrixByStation(uneStation.getIdStation()));
-                }
+                listStation = delegateRecuperationPrixStation.recupererPrixStation(listStation);
                 AffichagePrix.logger.ecrireInfoLogger("Le nombre de station récupéré est de : " + listStation.Count, activationReadStation);
             }
             return listStation;
@@ -92,11 +72,7 @@ namespace WcfService1.ReadBDD.Delegate
             List<Station> listStation = daoReadDonneeStation.recupererStationVilleSansPrix(ville, departement);
             if (listStation != null)
             {
-                foreach (Station uneStation in listStation)
-                {
-                    AffichagePrix.logger.ecrireInfoLogger("Accès à daoReadDonneePrix.readPrixByStation(Station uneStation) avec uneStation = " + uneStation.getIdStation(), activationReadPrix);
-                    uneStation.setPrice(daoReadDonneePrix.readPrixByStation(uneStation.getIdStation()));
-                }
+                listStation = delegateRecuperationPrixStation.recupererPrixStation(listStation);
                 AffichagePrix.logger.ecrireInfoLogger("Le nombre de station récupéré est de : " + listStation.Count, activationReadStation);
             }
             return listStation;

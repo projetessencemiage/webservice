@@ -14,6 +14,7 @@ namespace WcfService1.ReadBDD.DAO
     {
         private string myConnectionString;
         private bool activationUserService;
+        private bool activationActionAdmin;
 
         public ReadUserService()
         {
@@ -32,6 +33,14 @@ namespace WcfService1.ReadBDD.DAO
             {
                 activationUserService = false;
             }
+            try
+            {
+                activationActionAdmin = Convert.ToBoolean(ConfigurationManager.AppSettings["activationActionAdmin"]);
+            }
+            catch (FormatException e)
+            {
+                activationActionAdmin = false;
+            }
         }
 
         internal ReponseConnectionUser identificationUser(string identifiant, string mdp)
@@ -46,7 +55,7 @@ namespace WcfService1.ReadBDD.DAO
                 UserService.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationUserService);
                 connection = new MySqlConnection(myConnectionString);
                 cmd = connection.CreateCommand();
-                cmd.CommandText = "Select pseudo, nom, prenom, email, mdp, adresse, code_postal, ville, url_avatar, id_station_favorite, id_carburant_favorite, user.id_role, nom_role FROM user Join role on role.id_role = user.id_role Where pseudo = @identifiant AND mdp = @mdp;";
+                cmd.CommandText = "Select pseudo, civilite, nom, prenom, email, mdp, adresse, code_postal, ville, url_avatar, id_station_favorite, id_carburant_favorite, user.id_role, nom_role FROM user Join role on role.id_role = user.id_role Where pseudo = @identifiant AND mdp = @mdp;";
                 UserService.logger.ecrireInfoLogger("Execution de la requete : " + cmd.CommandText
                     + " avec les parametres identifiant =" + identifiant + " & mdp = " + mdp, activationUserService);
 
@@ -72,9 +81,10 @@ namespace WcfService1.ReadBDD.DAO
                         string mot_de_passe = "";
                         string avatar = dr["url_avatar"].ToString();
                         string email = dr["email"].ToString();
+                        string civilite = dr["civilite"].ToString();
                         int id_station_favorite = Convert.ToInt32(dr["id_station_favorite"].ToString());
                         int id_carburant_pref = Convert.ToInt32(dr["id_carburant_favorite"].ToString());
-                        user = new User(id_role, nom_role, nom, prenom, pseudo, email, mot_de_passe, adresse, code_postal, ville, avatar, id_station_favorite,id_carburant_pref);
+                        user = new User(id_role, nom_role, civilite, nom, prenom, pseudo, email, mot_de_passe, adresse, code_postal, ville, avatar, id_station_favorite, id_carburant_pref);
                     }
                 }
             }
@@ -95,6 +105,63 @@ namespace WcfService1.ReadBDD.DAO
                 return new ReponseConnectionUser(0, user);
             }
             return new ReponseConnectionUser(1, user);
+        }
+
+        internal List<User> listUtilisateur()
+        {
+            MySqlConnection connection = new MySqlConnection(myConnectionString);
+            MySqlCommand cmd;
+            List<User> list_user = new List<User>();
+            DataSet ds = new DataSet();
+
+            try
+            {
+                ActionAdmin.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationActionAdmin);
+                connection = new MySqlConnection(myConnectionString);
+                cmd = connection.CreateCommand();
+                cmd.CommandText = "Select pseudo, civilite, nom, prenom, email, mdp, adresse, code_postal, ville, url_avatar, id_station_favorite, id_carburant_favorite, user.id_role, nom_role FROM user Join role on role.id_role = user.id_role;";
+                ActionAdmin.logger.ecrireInfoLogger("Execution de la requete : " + cmd.CommandText, activationActionAdmin);
+
+
+
+                MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
+
+                adap.Fill(ds);
+                if (ds.Tables.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        int id_role = Convert.ToInt32(dr["id_role"].ToString());
+                        string nom_role = dr["nom_role"].ToString();
+                        string nom = dr["nom"].ToString();
+                        string prenom = dr["prenom"].ToString();
+                        string pseudo = dr["pseudo"].ToString();
+                        string adresse = dr["adresse"].ToString();
+                        string code_postal = dr["code_postal"].ToString();
+                        string ville = dr["ville"].ToString();
+                        string mot_de_passe = "";
+                        string avatar = dr["url_avatar"].ToString();
+                        string email = dr["email"].ToString();
+                        string civilite = dr["civilite"].ToString();
+                        int id_station_favorite = Convert.ToInt32(dr["id_station_favorite"].ToString());
+                        int id_carburant_pref = Convert.ToInt32(dr["id_carburant_favorite"].ToString());
+                        list_user.Add(new User(id_role, nom_role, civilite, nom, prenom, pseudo, email, mot_de_passe, adresse, code_postal, ville, avatar, id_station_favorite, id_carburant_pref));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ActionAdmin.logger.ecrireInfoLogger("ERROR : " + e.StackTrace, true);
+                return null;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return list_user;
         }
     }
 }

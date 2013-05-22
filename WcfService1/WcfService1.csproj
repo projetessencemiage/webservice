@@ -62,6 +62,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ActionAdmin.svc" />
     <Content Include="ActionCommunaute.svc" />
     <Content Include="AffichagePrix.svc" />
     <Content Include="AjoutDonneesAdmin.svc" />
@@ -72,6 +73,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionAdmin.svc.cs">
+      <DependentUpon>ActionAdmin.svc</DependentUpon>
+    </Compile>
     <Compile Include="ActionCommunaute.svc.cs">
       <DependentUpon>ActionCommunaute.svc</DependentUpon>
     </Compile>
@@ -81,10 +85,17 @@
     <Compile Include="AjoutDonneesAdmin.svc.cs">
       <DependentUpon>AjoutDonneesAdmin.svc</DependentUpon>
     </Compile>
+    <Compile Include="IActionAdmin.cs" />
+    <Compile Include="Outil\GestionMail.cs" />
+    <Compile Include="Outil\OutilGeolocalisation.cs" />
     <Compile Include="Outil\ReponseConnectionUser.cs" />
     <Compile Include="ReadBDD\DAO\ReadUserService.cs" />
+    <Compile Include="ReadBDD\Delegate\DelegateActionAdminRead.cs" />
     <Compile Include="ReadBDD\Delegate\DelegateReadUserInfo.cs" />
+    <Compile Include="ReadBDD\Delegate\DelegateRecuperationPrixStation.cs" />
+    <Compile Include="WriteBDD\DAO\WriteDonneeStation.cs" />
     <Compile Include="WriteBDD\DAO\WriteUserService.cs" />
+    <Compile Include="WriteBDD\Delegate\DelegateActionAdminWrite.cs" />
     <Compile Include="WriteBDD\Delegate\DelegateEcritureUserService.cs" />
     <Compile Include="IActionCommunaute.cs" />
     <Compile Include="IAffichagePrix.cs" />

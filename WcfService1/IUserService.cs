@@ -14,9 +14,24 @@ namespace WcfService1
     public interface IUserService
     {
         [OperationContract]
-        ReponseUpdateBase InscriptionUser(string nom, string prenom, string pseudo, string email, string mdp, string adresse, string code_postal, string ville, string url_avatar, string string_id_station_favorite, string string_id_carburant_pref);
+        ReponseUpdateBase InscriptionUser(string civilite, string nom, string prenom, string pseudo, string email, string mdp, string adresse, string code_postal, string ville, string url_avatar, string string_id_station_favorite, string string_id_carburant_pref);
 
         [OperationContract]
         ReponseConnectionUser Identification(string identifiant, string mdp);
+
+        [OperationContract]
+        ReponseUpdateBase ChangementMDP(string identifiant, string ancienMDP, string nouveauMDP);
+
+        [OperationContract]
+        ReponseUpdateBase ReinitialisationMDP(string identifiant, string cle, string nouveauMDP);
+
+        [OperationContract]
+        ReponseUpdateBase MotDePasseOublie(string identifiant);
+
+        [OperationContract]
+        ReponseUpdateBase Desinscription(string identifiant, string mdp);
+
+        [OperationContract]
+        ReponseUpdateBase MiseAJourProfilUser(string civilite, string nom, string prenom, string pseudo, string email, string adresse, string code_postal, string ville, string url_avatar, string string_id_station_favorite, string string_id_carburant_pref);
     }
 }

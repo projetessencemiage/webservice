@@ -13,6 +13,8 @@ namespace User_Lib
         [DataMember]
         public Role role;
         [DataMember]
+        public string civilite;
+        [DataMember]
         public string nom;
         [DataMember]
         public string prenom;
@@ -36,9 +38,10 @@ namespace User_Lib
         public int id_carburant_pref;
 
 
-        public User(int idRole, string nomRole, string nom, string prenom, string pseudo, string email, string mdp, string adresse, string code_postal, string ville, string url_avatar, int id_station_favorite, int id_carburant_pref)
+        public User(int idRole, string nomRole, string civilite, string nom, string prenom, string pseudo, string email, string mdp, string adresse, string code_postal, string ville, string url_avatar, int id_station_favorite, int id_carburant_pref)
         {
             role = new Role(idRole, nomRole);
+            this.civilite = civilite;
             this.nom = nom;
             this.prenom = prenom;
             this.pseudo = pseudo;

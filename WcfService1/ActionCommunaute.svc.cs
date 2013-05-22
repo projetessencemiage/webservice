@@ -48,7 +48,7 @@ namespace WcfService1
             }
             catch (FormatException e)
             {
-                return drub.getReponseUdateBase(8);
+                return drub.getReponseUpdateBase(8);
             }
             if (id_station != null && !id_station.Equals("") && double_price != 0)
             {
@@ -56,7 +56,7 @@ namespace WcfService1
                 return delegateActionCommunaute.pushPrice(id_station, int_id_price, double_price);
             }
             
-            return drub.getReponseUdateBase(1);
+            return drub.getReponseUpdateBase(1);
         }
 
         public ReponseUpdateBase PushStationWithAddress(string address, string code_postal, string city, string tel, string id_enseigne, List<Prix> price_list)
@@ -68,14 +68,14 @@ namespace WcfService1
             }
             catch (FormatException e)
             {
-                return drub.getReponseUdateBase(8);
+                return drub.getReponseUpdateBase(8);
             }
             if (address != null && !address.Equals("") && code_postal != null && !code_postal.Equals("") && city != null && !city.Equals("") && int_id_enseigne != 0 && price_list != null)
             {
                 logger.ecrireInfoLogger("Accès à delegateActionCommunaute.pushStationAdress(string address, string code_postal, string city, string tel, int id_enseigne, List<Prix> price_list) avec address = " + address + " & code_postal = " + code_postal + " & city = " + city + " & tel = " + tel + " & id_enseigne = " + id_enseigne + " & price_list = " + price_list.ToString(), activationActionCommunaute);
-                return delegateActionCommunaute.pushStationAdress(address, code_postal, city, tel, int_id_enseigne, price_list);
+                return delegateActionCommunaute.pushStationAdress(address, code_postal, city, tel, int_id_enseigne, price_list, false);
             }
-            return drub.getReponseUdateBase(1);
+            return drub.getReponseUpdateBase(1);
         }
 
         public ReponseUpdateBase PushStationWithGPS(string tel, string latitude, string longitude, string id_enseigne, List<Prix> price_list)
@@ -91,14 +91,14 @@ namespace WcfService1
             }
             catch (FormatException e)
             {
-                return drub.getReponseUdateBase(8);
+                return drub.getReponseUpdateBase(8);
             }
             if (double_latitude != 0 && double_longitude != 0 && price_list != null && int_id_enseigne != 0)
             {
                 logger.ecrireInfoLogger("Accès à delegateActionCommunaute.pushPrice(string tel, double latitude, double longitude, int id_enseigne, List<Prix> price_list) avec tel = " + tel + " & latitude = " + latitude + " & longitude = " + longitude + " & id_enseigne = " + id_enseigne + " & price_list = " + price_list.ToString(), activationActionCommunaute);
-                return delegateActionCommunaute.pushStationGPS(tel, double_latitude, double_longitude, int_id_enseigne, price_list);
+                return delegateActionCommunaute.pushStationGPS(tel, double_latitude, double_longitude, int_id_enseigne, price_list, false);
             }
-            return drub.getReponseUdateBase(1);
+            return drub.getReponseUpdateBase(1);
         }
     }
 }

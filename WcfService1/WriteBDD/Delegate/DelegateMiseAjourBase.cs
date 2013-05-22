@@ -59,7 +59,7 @@ namespace WcfService1.ReadBDD.Delegate
                     {
                         list_prix.Add(new Prix(null, null, nodePrix.Attributes["nom"].Value, Single.Parse(nodePrix.Attributes["valeur"].Value.Replace(".", ",")), nodePrix.Attributes["maj"].Value));
                     }
-                    listStation.Add(new Station(id_station, list_prix, address, city, code_postal, longitude, lattitude, id_enseigne, enseigne_marque, tel));
+                    listStation.Add(new Station(id_station, list_prix, address, city, code_postal, longitude, lattitude, id_enseigne, enseigne_marque, tel, null));
                 }
             }
             catch (Exception)

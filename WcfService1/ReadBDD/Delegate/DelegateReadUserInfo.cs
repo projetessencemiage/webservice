@@ -20,5 +20,6 @@ namespace WcfService1.ReadBDD.Delegate
         {
             return daoReadUserService.identificationUser(identifiant, mdp);
         }
+
     }
 }

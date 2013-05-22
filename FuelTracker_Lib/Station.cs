@@ -30,10 +30,12 @@ namespace FuelTracker_Lib
         public Enseigne enseigne;
         [DataMember]
         public string tel;
+        [DataMember]
+        public string dateCreation;
 
         public Station() { }
 
-        public Station(string id_station, List<Prix> price_list, string address, string city, string code_postal, float longitude, float lattitude, string id_enseigne, string enseigne_marque, string tel)
+        public Station(string id_station, List<Prix> price_list, string address, string city, string code_postal, float longitude, float lattitude, string id_enseigne, string enseigne_marque, string tel, string dateCreation)
         {
             this.id_station = id_station;
             this.price_list = price_list;
@@ -43,6 +45,7 @@ namespace FuelTracker_Lib
             this.longitude = longitude;
             this.lattitude = lattitude;
             this.id_enseigne = id_enseigne;
+            this.dateCreation = dateCreation;
             this.enseigne = new Enseigne(id_enseigne, enseigne_marque);
             this.tel = tel;
         }

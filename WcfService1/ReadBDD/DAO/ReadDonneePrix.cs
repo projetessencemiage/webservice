@@ -40,14 +40,20 @@ namespace WcfService1.ReadBDD.DAO
             listPrix = new List<Prix>();
             try
             {
-                AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationReadPrix);
+                if (AffichagePrix.logger != null)
+                {
+                    AffichagePrix.logger.ecrireInfoLogger("Connection à la base : " + myConnectionString, activationReadPrix);
+                }
                 connection = new MySqlConnection(myConnectionString);
                 MySqlCommand cmd;
                 connection.Open();
 
                 cmd = connection.CreateCommand();
                 string requete = "Select prix_type_id, type_nom, prix_valeur, prix_date From prix Join type on type.type_id = prix.prix_type_id where prix_station_id = @stationId";
-                AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre id_station = " + id_station, activationReadPrix);
+                if (AffichagePrix.logger != null)
+                {
+                    AffichagePrix.logger.ecrireInfoLogger("Execution de la requete : " + requete + " avec le parametre id_station = " + id_station, activationReadPrix);
+                }
                 cmd.CommandText = requete;
                 cmd.Parameters.AddWithValue("@stationId", id_station);
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
@@ -71,7 +77,10 @@ namespace WcfService1.ReadBDD.DAO
             }
             catch (Exception e)
             {
-                AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace, true);
+                if (AffichagePrix.logger != null)
+                {
+                    AffichagePrix.logger.ecrireInfoLogger("ERROR : " + e.StackTrace, true);
+                }
                 return null;
             }
 

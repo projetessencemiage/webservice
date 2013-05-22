@@ -20,5 +20,10 @@ namespace WcfService1.Outil
             this.code = code;
             this.user = user;
         }
+
+        public int getCode()
+        {
+            return code;
+        }
     }
 }
